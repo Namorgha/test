@@ -3,5 +3,6 @@
 int main()
 {
 	printf("Hello world\n");
-	return 0;
+	printf("fuck\n");
+	return 0;	
 }
