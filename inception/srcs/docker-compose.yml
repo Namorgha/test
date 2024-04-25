@@ -16,7 +16,6 @@ services:
     secrets:
        - db_root_password
        - db_password
-
  
   nginx:
     container_name: nginx
@@ -31,7 +30,6 @@ services:
       - inception
     depends_on:
       - wordpress
-      # - tempo
     ports:
       - "443:443"
 
@@ -53,6 +51,28 @@ services:
     env_file: ./.env
     secrets:
        - db_password
+
+  adminer:
+    build: requirements/bonus/adminer
+    image: adminer:42
+    container_name: adminer
+    restart: always
+    ports:
+     - "8080:8080"
+    networks:
+     - inception
+    depends_on:
+     - mariadb
+
+  netdata:
+    build: requirements/bonus/netdata
+    image: netdata:42
+    container_name: netdata
+    restart: always
+    ports:
+      - "2000:19999"
+    networks:
+     - inception
 
 volumes:
   mariadb:
